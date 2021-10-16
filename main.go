@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/TechBowl-japan/go-stations/handler"
 	"log"
 	"net/http"
 	"os"
@@ -49,8 +50,9 @@ func realMain() error {
 
 	// set http handlers
 	mux := http.NewServeMux()
+	mux.Handle("/healthz", &handler.HealthzHandler{})
 
-	// TODO: ここから実装を行う
+	log.Fatal(http.ListenAndServe(port, mux))
 
 	return nil
 }
